@@ -1,0 +1,378 @@
+:host {
+  --primary-color: #3880ff;
+  --secondary-color: #0cd1e8;
+}
+
+.login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg,
+    rgba(56, 128, 255, 0.9) 0%,
+    rgba(56, 128, 255, 0.7) 50%,
+    rgba(56, 128, 255, 0.85) 100%);
+
+  .login-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+      linear-gradient(135deg,
+        rgba(56, 128, 255, 0.9) 0%,
+        rgba(12, 209, 232, 0.8) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .login-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index: 1;
+  }
+
+  // Login form section - unified layout for desktop and mobile
+  .login-form-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 3rem;
+    width: 100vw;
+    height: 100vh;
+
+    // Apply same gradient as mobile
+    background: linear-gradient(135deg,
+      var(--primary-color) 0%,
+      rgba(56, 128, 255, 0.8) 50%,
+      var(--secondary-color) 100%);
+
+    // External branding (above card)
+    .external-branding {
+      text-align: center;
+      color: white;
+
+      .brand-main {
+        .owl-logo-large {
+          width: 100px;
+          height: 100px;
+          margin-bottom: 1rem;
+          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+          animation: owlPulse 3s ease-in-out infinite;
+        }
+
+        .brand-title-large {
+          margin: 0 0 0.5rem 0;
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: white;
+          text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+          letter-spacing: -1px;
+          line-height: 1;
+        }
+
+        .brand-subtitle {
+          margin: 0;
+          font-size: 1.1rem;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 400;
+          text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 400px;
+
+      // Create white card container
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 16px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      .form-header {
+        text-align: center;
+        margin-bottom: 2rem;
+
+        .unified-header {
+          .form-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+          }
+
+          .form-subtitle {
+            margin: 0;
+            color: rgba(12, 209, 232, 0.7);
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .login-form {
+        .form-field {
+          margin-bottom: 1rem;
+
+          .full-width {
+            width: 100%;
+          }
+
+          .margin-10 {
+            margin-bottom: 0.5rem;
+            --border-radius: 8px;
+            --background: rgba(0, 0, 0, 0.02);
+            --border-color: rgba(0, 0, 0, 0.13);
+            --color: var(--ion-color-dark);
+
+            &.item-has-focus {
+              --border-color: var(--primary-color);
+              --highlight-color-focused: var(--primary-color);
+            }
+
+            ion-label {
+              --color: rgba(0, 0, 0, 0.6);
+              font-weight: 500;
+            }
+
+            ion-input {
+              --color: var(--ion-color-dark);
+              --placeholder-color: rgba(0, 0, 0, 0.4);
+            }
+
+            ion-icon {
+              color: rgba(0, 0, 0, 0.4);
+              font-size: 1.2rem;
+            }
+          }
+
+          .error-message {
+            color: var(--ion-color-danger);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            margin-left: 1rem;
+          }
+        }
+
+        .loading-container {
+          margin-bottom: 1.5rem;
+
+          ion-progress-bar {
+            --progress-background: var(--primary-color);
+            height: 4px;
+            border-radius: 2px;
+          }
+        }
+
+        .form-actions {
+          .login-button {
+            height: 48px;
+            font-size: 1rem;
+            font-weight: 600;
+            --border-radius: 8px;
+            --background: var(--primary-color);
+            --background-activated: rgba(56, 128, 255, 0.8);
+            --background-hover: rgba(56, 128, 255, 0.9);
+            --color: white;
+            margin-top: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            &:not(.button-disabled):hover {
+              transform: translateY(-2px);
+              box-shadow: 0 8px 24px rgba(56, 128, 255, 0.3);
+            }
+
+            &:not(.button-disabled):active {
+              transform: translateY(0);
+            }
+
+            &.button-disabled {
+              opacity: 0.7;
+              transform: none;
+            }
+          }
+        }
+      }
+    }
+
+    // External footer (below card)
+    .external-footer {
+      text-align: center;
+      color: white;
+
+      .client-info {
+        margin-bottom: 0.5rem;
+
+        .client-label {
+          display: inline-block;
+          padding: 0.4rem 1rem;
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 50px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: white;
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          backdrop-filter: blur(10px);
+        }
+      }
+
+      .version, .copyright {
+        margin: 0.25rem 0;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  // Mobile responsive - Adjustments for smaller screens
+  @media (max-width: 768px) {
+    .login-form-section {
+      padding: 2rem 1.5rem;
+      gap: 1.5rem;
+
+      .external-branding .brand-main {
+        .owl-logo-large {
+          width: 80px;
+          height: 80px;
+        }
+
+        .brand-title-large {
+          font-size: 2.2rem;
+        }
+
+        .brand-subtitle {
+          font-size: 1rem;
+        }
+      }
+
+      .form-container {
+        padding: 2rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .login-form-section {
+      padding: 1.5rem 1rem;
+      gap: 1rem;
+
+      .external-branding .brand-main {
+        .owl-logo-large {
+          width: 70px;
+          height: 70px;
+          margin-bottom: 0.8rem;
+        }
+
+        .brand-title-large {
+          font-size: 2rem;
+          margin-bottom: 0.4rem;
+        }
+
+        .brand-subtitle {
+          font-size: 0.9rem;
+        }
+      }
+
+      .form-container {
+        max-width: 360px;
+        padding: 1.5rem;
+
+        .form-header {
+          margin-bottom: 1.5rem;
+
+          .unified-header {
+            .form-title {
+              font-size: 1.6rem;
+              margin-bottom: 0.4rem;
+            }
+
+            .form-subtitle {
+              font-size: 0.85rem;
+            }
+          }
+        }
+      }
+
+      .external-footer {
+        .client-info .client-label {
+          padding: 0.3rem 0.8rem;
+          font-size: 0.8rem;
+        }
+
+        .version, .copyright {
+          font-size: 0.75rem;
+          margin: 0.2rem 0;
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes owlPulse {
+  0%, 70%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  35% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+// Fade in animation for the entire container
+.login-container {
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Estilos específicos para items de Ionic
+:host ::ng-deep {
+  .item-fill-solid {
+    --background: rgba(0, 0, 0, 0.02);
+    --border-color: rgba(0, 0, 0, 0.13);
+    --border-radius: 8px;
+    --inner-border-width: 0;
+    --highlight-height: 2px;
+  }
+
+  .item-has-focus {
+    --border-color: var(--primary-color);
+    --highlight-color-focused: var(--primary-color);
+  }
+
+  .progress-bar-indeterminate {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary-color),
+      transparent
+    );
+  }
+}

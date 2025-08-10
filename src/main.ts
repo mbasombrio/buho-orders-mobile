@@ -1,3 +1,4 @@
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { provideIonicAngular } from '@ionic/angular/standalone';
@@ -7,12 +8,17 @@ import {
   archiveOutline,
   bookmark,
   bookmarkOutline,
+  businessOutline,
   heart,
   heartOutline,
+  lockClosedOutline,
+  logOutOutline,
+  logOutSharp,
   mail,
   mailOutline,
   paperPlane,
   paperPlaneOutline,
+  personOutline,
   trash,
   trashOutline,
   warning,
@@ -20,6 +26,7 @@ import {
 } from 'ionicons/icons';
 import { routes } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
+import { authInterceptor } from './app/interceptors/auth.interceptor';
 
 // Registrar iconos
 addIcons({
@@ -36,12 +43,18 @@ addIcons({
   'warning': warning,
   'warning-outline': warningOutline,
   'bookmark': bookmark,
-  'bookmark-outline': bookmarkOutline
+  'bookmark-outline': bookmarkOutline,
+  'business-outline': businessOutline,
+  'person-outline': personOutline,
+  'lock-closed-outline': lockClosedOutline,
+  'log-out-outline': logOutOutline,
+  'log-out-sharp': logOutSharp
 });
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideIonicAngular()
+    provideIonicAngular(),
+    provideHttpClient(withInterceptors([authInterceptor]))
   ]
 }).catch(err => console.log(err));

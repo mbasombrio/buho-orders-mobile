@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  product: "retail",
+  title: "DEV",
+  url: "http://localhost:9555/",
+  useMultiClient: true,
+  nameMultiClient: "tomas",
+  appVersion: '1.0.0'
 };
 
 /*
