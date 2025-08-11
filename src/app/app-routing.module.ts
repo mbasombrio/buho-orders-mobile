@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FolderPage } from './folder/folder.page';
 import { authGuard } from './guards/auth.guard';
 import { noAuthGuard } from './guards/no-auth.guard';
 import { LoginPage } from './login/login.page';
@@ -9,7 +8,7 @@ import { LoginPage } from './login/login.page';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
@@ -18,13 +17,13 @@ export const routes: Routes = [
     canActivate: [noAuthGuard]
   },
   {
-    path: 'folder/:id',
-    component: FolderPage,
+    path: 'dashboard',
+    loadComponent: () => import('./dashboard/dashboard.page').then(m => m.DashboardPage),
     canActivate: [authGuard]
   },
   {
     path: '**',
-    redirectTo: 'login'
+    redirectTo: 'dashboard'
   }
 ];
 

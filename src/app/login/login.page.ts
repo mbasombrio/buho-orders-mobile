@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     // Si ya está autenticado, redirigir a la página principal
     if (this.authService.isAuthenticated) {
-      this.router.navigate(['/folder/inbox']);
+      this.router.navigate(['/folder/dashboard']);
       return;
     }
 
@@ -144,9 +144,9 @@ export class LoginPage implements OnInit {
 
           // Guardar identidad del usuario
           localStorage.setItem('identity', response.body);
-
+          this.router.navigate(['/dashboard']);
           this.setLoading(false);
-          this.router.navigate(['/folder/inbox']);
+
         } catch (error) {
           this.setLoading(false);
           this.showError('Error al procesar la respuesta del servidor');
