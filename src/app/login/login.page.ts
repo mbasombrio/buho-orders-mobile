@@ -21,6 +21,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginPage implements OnInit {
   loginForm!: FormGroup;
   loading = false;
+  showPassword = false;
   currentYear = new Date().getFullYear();
   client: string = '';
   useMultiClient = environment.useMultiClient;
@@ -167,5 +168,9 @@ export class LoginPage implements OnInit {
 
     document.body.appendChild(alert);
     alert.present();
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

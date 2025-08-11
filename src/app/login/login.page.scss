@@ -173,6 +173,46 @@
               height: 100%;
               width: 20px;
               min-width: 20px;
+
+              // Estilo específico para el ícono de mostrar/ocultar contraseña
+              &[name="eye-outline"], &[name="eye-off-outline"] {
+                cursor: pointer;
+                transition: color 0.2s ease;
+
+                &:hover {
+                  color: rgba(0, 0, 0, 0.6);
+                }
+
+                &:active {
+                  color: var(--primary-color);
+                }
+              }
+            }
+
+            // Estilos para el ion-input-password-toggle
+            ion-input-password-toggle {
+              color: rgba(0, 0, 0, 0.4);
+              --ion-color-step-600: rgba(0, 0, 0, 0.4);
+
+              &:hover {
+                color: rgba(0, 0, 0, 0.6);
+                --ion-color-step-600: rgba(0, 0, 0, 0.6);
+              }
+
+              // Forzar el uso de íconos outline
+              ::ng-deep ion-icon {
+                --ionicon-stroke-width: 32px !important;
+                font-weight: 300 !important;
+              }
+
+              // Alternativa: sobrescribir los íconos específicos para usar outline
+              ::ng-deep ion-icon[name="eye"] {
+                --ionicon-name: 'eye-outline' !important;
+              }
+
+              ::ng-deep ion-icon[name="eye-off"] {
+                --ionicon-name: 'eye-off-outline' !important;
+              }
             }
           }
 

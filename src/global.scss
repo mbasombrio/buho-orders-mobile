@@ -35,3 +35,26 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+// Estilos globales para ion-input-password-toggle con íconos outline
+ion-input-password-toggle {
+  ion-icon {
+    --ionicon-stroke-width: 32px !important;
+    font-weight: 300 !important;
+  }
+
+  // Forzar íconos outline específicos
+  ion-icon[name="eye"] {
+    --ionicon-name: 'eye-outline' !important;
+  }
+
+  ion-icon[name="eye-off"] {
+    --ionicon-name: 'eye-off-outline' !important;
+  }
+}
+
+// Alternativa más agresiva
+ion-input ion-input-password-toggle ion-icon[name*="eye"] {
+  --ionicon-stroke-width: 32px !important;
+  font-weight: 300 !important;
+}
