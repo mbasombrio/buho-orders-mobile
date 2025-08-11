@@ -28,13 +28,13 @@ export class AuthStateService {
   }
 
   updateTokenSignal() {
-    const token = localStorage.getItem('jwt-token');
+    const token = localStorage.getItem('token');
     this.tokenSignal.set(token);
     console.log('Token signal actualizado:', token ? 'Token presente' : 'Sin token');
   }
 
   clearAuth() {
-    localStorage.removeItem('jwt-token');
+    localStorage.removeItem('token');
     localStorage.removeItem('token-expiration');
     localStorage.removeItem('identity');
     localStorage.removeItem('client');
