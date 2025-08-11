@@ -30,19 +30,34 @@
         <!-- Welcome section -->
         <div class="welcome-section">
           <div class="welcome-card">
-            <h2 class="welcome-title">¡Bienvenido!</h2>
+            <div class="welcome-header">
+              <h2 class="welcome-title">Panel de Control</h2>
+              <p class="welcome-subtitle">Gestione sus operaciones de manera eficiente</p>
+            </div>
 
             <!-- Quick actions -->
             <div class="quick-actions">
-              <ion-button expand="block" fill="clear" class="action-button" routerLink="/dashboard/orders">
-                <ion-icon name="receipt-outline" slot="start"></ion-icon>
-                Ver Pedidos
-              </ion-button>
+              <div class="action-card" routerLink="/dashboard/orders">
+                <div class="action-icon-wrapper">
+                  <ion-icon name="receipt-outline" class="action-icon"></ion-icon>
+                </div>
+                <div class="action-content">
+                  <h3 class="action-title">Gestión de Pedidos</h3>
+                  <p class="action-description">Administre y supervise todos los pedidos</p>
+                </div>
+                <ion-icon name="chevron-forward-outline" class="action-arrow"></ion-icon>
+              </div>
 
-              <ion-button expand="block" fill="clear" class="action-button">
-                <ion-icon name="people-outline" slot="start"></ion-icon>
-                Clientes
-              </ion-button>
+              <div class="action-card">
+                <div class="action-icon-wrapper">
+                  <ion-icon name="people-outline" class="action-icon"></ion-icon>
+                </div>
+                <div class="action-content">
+                  <h3 class="action-title">Gestión de Clientes</h3>
+                  <p class="action-description">Administre su cartera de clientes</p>
+                </div>
+                <ion-icon name="chevron-forward-outline" class="action-arrow"></ion-icon>
+              </div>
             </div>
           </div>
         </div>

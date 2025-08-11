@@ -14,6 +14,7 @@ import {
   bookmarkOutline,
   businessOutline,
   cartOutline,
+  chevronForwardOutline,
   heart,
   heartOutline,
   lockClosedOutline,
@@ -62,7 +63,8 @@ addIcons({
   'apps-outline': appsOutline,
   'cart-outline': cartOutline,
   'add': add,
-  'add-outline': addOutline
+  'add-outline': addOutline,
+  'chevron-forward-outline': chevronForwardOutline
 });
 
 bootstrapApplication(AppComponent, {
