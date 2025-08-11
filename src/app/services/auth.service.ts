@@ -26,7 +26,7 @@ export interface LoginResponse {
 })
 export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  private readonly TOKEN_KEY = 'token';
+  public readonly TOKEN_KEY = 'token';
   private readonly IDENTITY_KEY = 'identity';
   public user: User | null = null;
 
@@ -34,8 +34,6 @@ export class AuthService {
   private readonly API_URL = environment.url;
 
   constructor(private http: HttpClient) {
-    // Verificar si hay un token guardado al inicializar el servicio
-    this.checkAuthStatus();
   }
 
   get isAuthenticated$(): Observable<boolean> {
@@ -46,16 +44,6 @@ export class AuthService {
     return this.isAuthenticatedSubject.value;
   }
 
-  private checkAuthStatus(): void {
-    const token = this.getToken();
-    const identity = this.getIdentity();
-    const isValid = this.isTokenValid(token) && !!identity;
-    this.isAuthenticatedSubject.next(isValid);
-
-    if (identity) {
-      this.user = identity;
-    }
-  }
 
   private isTokenValid(token: string | null): boolean {
     if (!token || token === 'null') return false;
@@ -182,8 +170,10 @@ export class AuthService {
   }
 
   saveToken(token: string, tokenExpiration: string): void {
+    console.log('saveToken llamado con token:', !!token, 'expiration:', tokenExpiration);
     localStorage.setItem(this.TOKEN_KEY, token);
     localStorage.setItem('token-expiration', tokenExpiration);
+
   }
 
   removeToken(): void {

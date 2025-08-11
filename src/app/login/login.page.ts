@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule, LoadingController } from '@ionic/angular';
 import { environment } from '../../environments/environment';
+import { AuthStateService } from '../services/auth-state.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -40,17 +41,16 @@ export class LoginPage implements OnInit {
   @ViewChild("cliente", { static: false }) inputClient!: ElementRef;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private authService: AuthService,
+    private authStateService: AuthStateService
   ) { }
 
   ngOnInit() {
-    // Si ya está autenticado, redirigir a la página principal
-    if (this.authService.isAuthenticated) {
-      this.router.navigate(['/folder/dashboard']);
-      return;
-    }
-
+    // Primero inicializar el formulario
     this.initializeForm();
   }
 
@@ -89,6 +89,11 @@ export class LoginPage implements OnInit {
 
   setLoading(loading: boolean) {
     this.loading = loading;
+
+    if (!this.loginForm || !this.loginForm.controls) {
+      return;
+    }
+
     if (loading) {
       this.loginForm.controls['user'].disable();
       this.loginForm.controls['pass'].disable();
@@ -101,10 +106,18 @@ export class LoginPage implements OnInit {
   }
 
   hasError(controlName: string, errorName: string): boolean {
+    if (!this.loginForm || !this.loginForm.controls) {
+      return false;
+    }
     return this.loginForm.controls[controlName].hasError(errorName);
   }
 
   onLogin() {
+    if (!this.loginForm) {
+      console.error('Form not initialized');
+      return;
+    }
+
     this.loginForm.markAllAsTouched();
 
     if (this.loginForm.invalid) {
@@ -131,21 +144,26 @@ export class LoginPage implements OnInit {
       next: (response) => {
         // Procesar respuesta del login
         try {
-          this.authService.user = JSON.parse(response.body);
-
-          // Guardar token y expiración
+          // Guardar token y expiración directamente en localStorage
           const token = response.headers.get('jwt-token');
           const tokenExpiration = response.headers.get('token-expiration');
 
           if (token && tokenExpiration) {
             const timeExpiration = Number(tokenExpiration) + Date.now();
-            this.authService.saveToken(token, timeExpiration.toString());
+            localStorage.setItem('token', token);
+            localStorage.setItem('token-expiration', timeExpiration.toString());
           }
 
           // Guardar identidad del usuario
           localStorage.setItem('identity', response.body);
-          this.router.navigate(['/dashboard']);
+
           this.setLoading(false);
+
+          // Actualizar el signal del AuthStateService para reflejar el nuevo estado
+          this.authStateService.updateTokenSignal();
+
+          // Navegar inmediatamente - el signal se actualizará automáticamente
+          this.router.navigate(['/dashboard']);
 
         } catch (error) {
           this.setLoading(false);

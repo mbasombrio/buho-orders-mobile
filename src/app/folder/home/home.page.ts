@@ -1,21 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { environment } from '../../environments/environment';
-import { AuthService } from '../services/auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
     CommonModule,
     IonicModule
   ]
 })
-export class DashboardPage implements OnInit {
+export class HomePage implements OnInit {
   currentYear = new Date().getFullYear();
   environment = environment;
 
@@ -28,12 +26,7 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }

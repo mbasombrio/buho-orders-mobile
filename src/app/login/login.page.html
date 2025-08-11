@@ -31,7 +31,6 @@
               <ion-label position="floating">Cliente</ion-label>
               <ion-input formControlName="client" #cliente (keyup.enter)="onLogin()" autofocus required>
               </ion-input>
-              <ion-icon name="business-outline" slot="end"></ion-icon>
             </ion-item>
             <div class="error-message" *ngIf="hasError('client', 'required') && loginForm.get('client')?.touched">
               Complete el campo cliente
@@ -44,7 +43,6 @@
               <ion-label position="floating">Usuario</ion-label>
               <ion-input formControlName="user" #username (keyup.enter)="onLogin()" required>
               </ion-input>
-              <ion-icon name="person-outline" slot="end"></ion-icon>
             </ion-item>
             <div class="error-message" *ngIf="hasError('user', 'required') && loginForm.get('user')?.touched">
               Complete el campo usuario
@@ -58,8 +56,6 @@
               <ion-input formControlName="pass" #password [type]="showPassword ? 'text' : 'password'"
                 (keyup.enter)="onLogin()" required>
               </ion-input>
-              <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'" slot="end"
-                (click)="togglePasswordVisibility()"></ion-icon>
             </ion-item>
             <div class="error-message" *ngIf="hasError('pass', 'required') && loginForm.get('pass')?.touched">
               Complete el campo contraseña

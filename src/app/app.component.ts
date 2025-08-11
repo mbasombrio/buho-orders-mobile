@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, effect } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { AuthService } from './services/auth.service';
+import { AuthStateService } from './services/auth-state.service';
 
 @Component({
   selector: 'app-root',
@@ -17,46 +16,46 @@ import { AuthService } from './services/auth.service';
   ]
 })
 export class AppComponent implements OnInit {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-
-  // Observable para el estado de autenticación
-  isAuthenticated$: Observable<boolean>;
+  // Usar el servicio de estado de autenticación
+  isAuthenticated = this.authStateService.isAuthenticated;
 
   constructor(
-    private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private authStateService: AuthStateService
   ) {
-    // Suscribirse al estado de autenticación
-    this.isAuthenticated$ = this.authService.isAuthenticated$;
+    // Effect que reacciona a cambios en el estado de autenticación
+    effect(() => {
+      const authenticated = this.isAuthenticated();
+      console.log('Estado de autenticación cambió:', authenticated);
+
+      if (!authenticated && this.router.url !== '/login') {
+        console.log('No autenticado, redirigiendo a login');
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   ngOnInit() {
-    // Verificar el estado de autenticación al iniciar la app
+    // Verificar el estado inicial
     this.checkAuthenticationStatus();
+
+    // Escuchar cambios en localStorage (útil si se modifica desde otra pestaña)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'jwt-token' || e.key === 'token-expiration') {
+        this.authStateService.updateTokenSignal();
+      }
+    });
   }
 
   private checkAuthenticationStatus() {
-    if (this.authService.isAuthenticated) {
+    if (this.isAuthenticated()) {
       // Si está autenticado y está en login, redirigir a la página principal
       if (this.router.url === '/login' || this.router.url === '/') {
-        this.router.navigate(['/folder/inbox']);
+        this.router.navigate(['/dashboard']);
       }
     } else {
       // Si no está autenticado, redirigir al login
       this.router.navigate(['/login']);
     }
-  }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
   }
 }
