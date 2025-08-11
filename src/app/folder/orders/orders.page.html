@@ -41,11 +41,11 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Lista de Pedidos</ion-card-title>
-      <ion-card-subtitle>{{ orders.length }} pedidos encontrados</ion-card-subtitle>
+
     </ion-card-header>
 
     <ion-card-content>
-      @if (orders.length === 0) {
+      @if (orderResponse.rows.length === 0) {
       <div class="empty-state">
         <ion-icon name="receipt-outline" size="large"></ion-icon>
         <h3>No hay pedidos</h3>
@@ -57,20 +57,20 @@
       </div>
       } @else {
       <ion-list>
-        @for (order of orders; track order.id) {
+        @for (order of orderResponse.rows; track order.id) {
         <ion-item-sliding>
           <ion-item button (click)="viewOrderDetails(order)">
             <ion-label>
               <h2>#{{ order.id }}</h2>
-              <h3>{{ order.customer }}</h3>
-              <p>{{ order.date }} • {{ order.items }} artículos</p>
+              <h3>{{ order.customer?.name }}</h3>
+              <p>{{ order.open | date: 'dd/MM/yyyy' }}</p>
             </ion-label>
 
             <div slot="end" class="order-info">
-              <ion-chip [color]="getStatusColor(order.status)">
-                {{ getStatusText(order.status) }}
+              <ion-chip [color]="getStatusColor(order.state)">
+                {{ getStatusText(order.state) }}
               </ion-chip>
-              <p class="order-total">${{ order.total }}</p>
+              <p class="order-total">${{ showTotal(order) }}</p>
             </div>
           </ion-item>
 
