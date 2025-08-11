@@ -77,66 +77,67 @@ export class AuthService {
     localStorage.setItem('client', user.client);
 
     // Por ahora simulamos la respuesta - reemplazar con llamada real
-    return new Observable(observer => {
-      setTimeout(() => {
-        if (username && password) {
-          // Simular respuesta exitosa
-          const mockUser = {
-            id: 1,
-            userName: username,
-            client: clientToUse,
-            role: 1,
-            branches: [],
-            restrictions: {}
-          };
+    /*   return new Observable(observer => {
+        setTimeout(() => {
+          if (username && password) {
+            // Simular respuesta exitosa
+            const mockUser = {
+              id: 1,
+              userName: username,
+              client: clientToUse,
+              role: 1,
+              branches: [],
+              restrictions: {}
+            };
 
-          const response: LoginResponse = {
-            body: JSON.stringify(mockUser),
-            headers: {
-              get: (key: string) => {
-                if (key === 'jwt-token') return 'fake-jwt-token-' + Date.now();
-                if (key === 'token-expiration') return '3600000'; // 1 hora
-                return null;
-              }
-            },
-            status: 200
-          };
+            const response: LoginResponse = {
+              body: JSON.stringify(mockUser),
+              headers: {
+                get: (key: string) => {
+                  if (key === 'jwt-token') return 'fake-jwt-token-' + Date.now();
+                  if (key === 'token-expiration') return '3600000'; // 1 hora
+                  return null;
+                }
+              },
+              status: 200
+            };
 
-          observer.next(response);
-          observer.complete();
-        } else {
-          observer.error({ message: 'Credenciales inválidas' });
-        }
-      }, 1000);
-    });
+            observer.next(response);
+            observer.complete();
+          } else {
+            observer.error({ message: 'Credenciales inválidas' });
+          }
+        }, 1000);
+      }); */
 
     // Descomenta esta línea cuando tengas el backend real:
-    // return this.http.post<any>(`${this.API_URL}loginService`, JSON.stringify(user), {
-    //   observe: 'response',
-    //   responseType: 'text' as 'json'
-    // });
+    return this.http.post<any>(`${this.API_URL}loginService`, JSON.stringify(user), {
+      observe: 'response',
+      responseType: 'text' as 'json'
+    });
   }
 
-  // Método de login simplificado para compatibilidad
-  simpleLogin(username: string, password: string): boolean {
-    if (username && password) {
-      // Simular token y usuario
-      const token = 'fake-jwt-token-' + Date.now() + '-' + username;
-      const mockUser: User = {
-        id: 1,
-        userName: username,
-        password: '',
-        role: 1
-      };
 
-      this.saveToken(token, (Date.now() + 3600000).toString());
-      localStorage.setItem(this.IDENTITY_KEY, JSON.stringify(mockUser));
-      this.user = mockUser;
-      this.isAuthenticatedSubject.next(true);
-      return true;
-    }
-    return false;
-  }
+  /*  // Método de login simplificado para compatibilidad
+   simpleLogin(username: string, password: string): boolean {
+     if (username && password) {
+       // Simular token y usuario
+       const token = 'fake-jwt-token-' + Date.now() + '-' + username;
+       const mockUser: User = {
+         id: 1,
+         userName: username,
+         password: '',
+         role: 1
+       };
+
+       this.saveToken(token, (Date.now() + 3600000).toString());
+       localStorage.setItem(this.IDENTITY_KEY, JSON.stringify(mockUser));
+       this.user = mockUser;
+       this.isAuthenticatedSubject.next(true);
+       return true;
+     }
+     return false;
+   } */
 
   logout(): void {
     this.removeToken();
