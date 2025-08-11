@@ -4,11 +4,14 @@ import { provideRouter } from '@angular/router';
 import { provideIonicAngular } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  apps,
+  appsOutline,
   archive,
   archiveOutline,
   bookmark,
   bookmarkOutline,
   businessOutline,
+  cartOutline,
   heart,
   heartOutline,
   lockClosedOutline,
@@ -19,6 +22,8 @@ import {
   paperPlane,
   paperPlaneOutline,
   personOutline,
+  settings,
+  settingsOutline,
   trash,
   trashOutline,
   warning,
@@ -48,7 +53,12 @@ addIcons({
   'person-outline': personOutline,
   'lock-closed-outline': lockClosedOutline,
   'log-out-outline': logOutOutline,
-  'log-out-sharp': logOutSharp
+  'log-out-sharp': logOutSharp,
+  'settings': settings,
+  'settings-outline': settingsOutline,
+  'apps': apps,
+  'apps-outline': appsOutline,
+  'cart-outline': cartOutline
 });
 
 bootstrapApplication(AppComponent, {

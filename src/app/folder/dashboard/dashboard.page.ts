@@ -22,15 +22,8 @@ export class DashboardPage implements OnInit {
   // Páginas del menú sidebar
   public appPages = [
     { title: 'Dashboard', url: '/dashboard', icon: 'apps' },
-    { title: 'Inbox', url: '/dashboard/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/dashboard/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/dashboard/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/dashboard/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/dashboard/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/dashboard/folder/spam', icon: 'warning' },
+    { title: 'Pedidos', url: '/dashboard/orders', icon: 'cart' },
   ];
-
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   get displayClient(): string {
     if (environment.useMultiClient) {

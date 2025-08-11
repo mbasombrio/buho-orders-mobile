@@ -1,0 +1,106 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Pedidos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addNewOrder()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Pedidos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Filtros y búsqueda -->
+  <ion-card>
+    <ion-card-content>
+      <ion-searchbar placeholder="Buscar pedidos..." debounce="300">
+      </ion-searchbar>
+
+      <ion-segment value="todos">
+        <ion-segment-button value="todos">
+          <ion-label>Todos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pendiente">
+          <ion-label>Pendientes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="completado">
+          <ion-label>Completados</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de pedidos -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Lista de Pedidos</ion-card-title>
+      <ion-card-subtitle>{{ orders.length }} pedidos encontrados</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      @if (orders.length === 0) {
+      <div class="empty-state">
+        <ion-icon name="receipt-outline" size="large"></ion-icon>
+        <h3>No hay pedidos</h3>
+        <p>Comienza agregando un nuevo pedido</p>
+        <ion-button (click)="addNewOrder()">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Agregar Pedido
+        </ion-button>
+      </div>
+      } @else {
+      <ion-list>
+        @for (order of orders; track order.id) {
+        <ion-item-sliding>
+          <ion-item button (click)="viewOrderDetails(order)">
+            <ion-avatar slot="start">
+              <div class="order-avatar">
+                <ion-icon name="receipt"></ion-icon>
+              </div>
+            </ion-avatar>
+
+            <ion-label>
+              <h2>Pedido #{{ order.id }}</h2>
+              <h3>{{ order.customer }}</h3>
+              <p>{{ order.date }} • {{ order.items }} artículos</p>
+            </ion-label>
+
+            <div slot="end" class="order-info">
+              <ion-chip [color]="getStatusColor(order.status)">
+                {{ getStatusText(order.status) }}
+              </ion-chip>
+              <p class="order-total">${{ order.total }}</p>
+            </div>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option (click)="editOrder(order)" color="primary">
+              <ion-icon name="create" slot="icon-only"></ion-icon>
+            </ion-item-option>
+            <ion-item-option (click)="deleteOrder(order)" color="danger">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+        }
+      </ion-list>
+      }
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Floating Action Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addNewOrder()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./folder/home/home.page').then(m => m.HomePage)
       },
       {
+        path: 'orders',
+        loadComponent: () => import('./folder/orders/orders.page').then(m => m.OrdersPage)
+      },
+      {
         path: 'folder/:id',
         component: FolderPage
       }
