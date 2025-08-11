@@ -24,7 +24,7 @@ export interface BasketOrder {
   observation: string;
 }
 
-export class BasketFilter {
+export class BasketListFilter {
   dateFrom: string;
   dateTo: string;
   customerName: string | null;
@@ -33,7 +33,6 @@ export class BasketFilter {
   branch: number;
   page: number;
   userId: number | null;
-  period
 
   constructor() {
     this.dateFrom = moment(new Date()).format("MM/DD/YYYY");
@@ -43,9 +42,18 @@ export class BasketFilter {
     this.userId = null;
     this.state = 'pending';
     this.branch = 9999999;
-    this.period = 'today';
     this.page = 1;
   }
+}
+
+export class BasketFilter extends BasketListFilter {
+  period: string | null;
+
+  constructor() {
+    super();
+    this.period = null;
+  }
+
 }
 
 export const BasketOrderState = {
