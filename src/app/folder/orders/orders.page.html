@@ -39,11 +39,6 @@
 
   <!-- Lista de pedidos -->
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Lista de Pedidos</ion-card-title>
-
-    </ion-card-header>
-
     <ion-card-content>
       @if (orderResponse.rows.length === 0) {
       <div class="empty-state">
@@ -63,7 +58,8 @@
             <ion-label>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
                 <span style="font-weight: 600; font-size: 1.2rem; color: var(--ion-color-dark);">#{{ order.id }}</span>
-                <span style="color: var(--ion-color-medium); font-size: 0.9rem; font-weight: 500;">{{ order.open | date: 'dd/MM/yyyy' }}</span>
+                <span style="color: var(--ion-color-medium); font-size: 0.9rem; font-weight: 500;">{{ order.open | date:
+                  'dd/MM/yyyy' }}</span>
               </div>
               <h3>{{ order.customer.name }}</h3>
               <div class="order-details">
@@ -76,7 +72,7 @@
                   <ion-label>{{ getBranchName(order) }}</ion-label>
                 </ion-chip>
               </div>
-              
+
               <div class="order-bottom">
                 <ion-chip [color]="getStatusColor(order.state)" class="status-chip">
                   {{ getStatusText(order.state) }}
