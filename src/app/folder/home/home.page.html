@@ -20,11 +20,9 @@
       <div class="dashboard-section">
         <!-- Header branding -->
         <div class="dashboard-header">
-          <div class="brand-main">
-            <img src="assets/icon/favicon.png" alt="BuhoManager" class="owl-logo-large">
-            <h1 class="brand-title-large">BuhoManager</h1>
-            <p class="brand-subtitle">Sistema de Pedidos</p>
-          </div>
+          <img src="assets/icon/favicon.png" alt="BuhoManager" class="owl-logo-large">
+          <h1 class="brand-title-large">BuhoManager</h1>
+          <p class="brand-subtitle">Sistema de Gestión Empresarial</p>
         </div>
 
         <!-- Welcome section -->
@@ -32,31 +30,30 @@
           <div class="welcome-card">
             <div class="welcome-header">
               <h2 class="welcome-title">Panel de Control</h2>
-              <p class="welcome-subtitle">Gestione sus operaciones de manera eficiente</p>
             </div>
 
             <!-- Quick actions -->
             <div class="quick-actions">
               <div class="action-card" routerLink="/dashboard/orders">
                 <div class="action-icon-wrapper">
-                  <ion-icon name="receipt-outline" class="action-icon"></ion-icon>
+                  <ion-icon name="receipt" class="action-icon"></ion-icon>
                 </div>
                 <div class="action-content">
                   <h3 class="action-title">Gestión de Pedidos</h3>
-                  <p class="action-description">Administre y supervise todos los pedidos</p>
+                  <p class="action-description">Control completo de pedidos, facturación y estados en tiempo real</p>
                 </div>
-                <ion-icon name="chevron-forward-outline" class="action-arrow"></ion-icon>
+                <ion-icon name="chevron-forward" class="action-arrow"></ion-icon>
               </div>
 
               <div class="action-card">
                 <div class="action-icon-wrapper">
-                  <ion-icon name="people-outline" class="action-icon"></ion-icon>
+                  <ion-icon name="people" class="action-icon"></ion-icon>
                 </div>
                 <div class="action-content">
                   <h3 class="action-title">Gestión de Clientes</h3>
-                  <p class="action-description">Administre su cartera de clientes</p>
+                  <p class="action-description">Base de datos centralizada con historial completo de transacciones</p>
                 </div>
-                <ion-icon name="chevron-forward-outline" class="action-arrow"></ion-icon>
+                <ion-icon name="chevron-forward" class="action-arrow"></ion-icon>
               </div>
             </div>
           </div>
@@ -64,9 +61,8 @@
 
         <!-- Footer info -->
         <div class="dashboard-footer">
-
-          <p class="version">Versión {{ environment.appVersion || '1.0.0' }}</p>
-          <p class="copyright">© {{ currentYear }} URS Company</p>
+          <p class="version">Versión {{ environment.appVersion || '1.0.0' }} • Build Profesional</p>
+          <p class="copyright">© {{ currentYear }} URS Company • Soluciones Empresariales</p>
         </div>
       </div>
     </div>
