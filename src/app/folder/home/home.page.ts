@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
 
@@ -16,6 +17,7 @@ import { environment } from '../../../environments/environment';
 export class HomePage implements OnInit {
   currentYear = new Date().getFullYear();
   environment = environment;
+  router = inject(Router);
 
   get displayClient(): string {
     if (environment.useMultiClient) {
@@ -29,4 +31,8 @@ export class HomePage implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+
+  navigateTo(page: string) {
+    this.router.navigate([`/dashboard/${page}`]);
+  }
 }
