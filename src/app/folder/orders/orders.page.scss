@@ -37,20 +37,7 @@ ion-content {
   }
 }
 
-.order-info {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: flex-end;
-
-  .order-total {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: var(--ion-color-dark);
-    margin: 0;
-  }
-}
+// Estilos antiguos de .order-info removidos ya que no se usan
 
 ion-item {
   --border-color: transparent;
@@ -60,22 +47,100 @@ ion-item {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   ion-label {
-    h2 {
-      font-weight: 600;
-      color: var(--ion-color-dark);
+    display: block !important;
+
+    .order-header {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      margin-bottom: 0.5rem;
+      width: 100% !important;
+      gap: 1rem;
+
+      .order-number {
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: var(--ion-color-dark);
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      .order-date {
+        color: var(--ion-color-medium);
+        font-size: 0.9rem;
+        margin: 0;
+        font-weight: 500;
+        white-space: nowrap;
+        margin-left: auto;
+      }
     }
 
     h3 {
       color: var(--ion-color-primary);
       font-weight: 500;
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
     }
 
-    p {
-      color: var(--ion-color-medium);
-      font-size: 0.9rem;
+    .order-details {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+
+      ion-chip {
+        --background: rgba(var(--ion-color-primary-rgb), 0.1);
+        --color: var(--ion-color-primary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        height: 24px;
+        border-radius: 12px;
+
+        ion-icon {
+          font-size: 0.8rem;
+          margin-right: 0.25rem;
+        }
+
+        ion-label {
+          font-size: 0.7rem;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        &[color="tertiary"] {
+          --background: rgba(var(--ion-color-tertiary-rgb), 0.15);
+          --color: var(--ion-color-tertiary);
+        }
+
+        &[color="secondary"] {
+          --background: rgba(var(--ion-color-secondary-rgb), 0.15);
+          --color: var(--ion-color-secondary);
+        }
+
+        &[color="medium"] {
+          --background: rgba(var(--ion-color-medium-rgb), 0.15);
+          --color: var(--ion-color-medium);
+        }
+      }
     }
+
+    .order-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .order-total {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    }
+
+
   }
 }
+
+
 
 ion-card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

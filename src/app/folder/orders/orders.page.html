@@ -61,25 +61,37 @@
         <ion-item-sliding>
           <ion-item button (click)="viewOrderDetails(order)">
             <ion-label>
-              <h2>#{{ order.id }}</h2>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span style="font-weight: 600; font-size: 1.2rem; color: var(--ion-color-dark);">#{{ order.id }}</span>
+                <span style="color: var(--ion-color-medium); font-size: 0.9rem; font-weight: 500;">{{ order.open | date: 'dd/MM/yyyy' }}</span>
+              </div>
               <h3>{{ order.customer.name }}</h3>
-              <p>{{ order.open | date: 'dd/MM/yyyy' }}</p>
+              <div class="order-details">
+                <ion-chip size="small" [color]="getDeliveryTypeColor(order)">
+                  <ion-icon name="{{ getDeliveryType(order) === 'Envío' ? 'car' : 'storefront' }}"></ion-icon>
+                  <ion-label>{{ getDeliveryType(order) }}</ion-label>
+                </ion-chip>
+                <ion-chip size="small" color="medium">
+                  <ion-icon name="business"></ion-icon>
+                  <ion-label>{{ getBranchName(order) }}</ion-label>
+                </ion-chip>
+              </div>
+              
+              <div class="order-bottom">
+                <ion-chip [color]="getStatusColor(order.state)" class="status-chip">
+                  {{ getStatusText(order.state) }}
+                </ion-chip>
+                <span class="order-total">${{ showTotal(order) | number:'1.2-2' }}</span>
+              </div>
             </ion-label>
-
-            <div slot="end" class="order-info">
-              <ion-chip [color]="getStatusColor(order.state)">
-                {{ getStatusText(order.state) }}
-              </ion-chip>
-              <p class="order-total">${{ showTotal(order) }}</p>
-            </div>
           </ion-item>
 
           <ion-item-options side="end">
             <ion-item-option (click)="editOrder(order)" color="primary">
-              <ion-icon name="create" slot="icon-only"></ion-icon>
+              <ion-icon name="create-outline" slot="icon-only"></ion-icon>
             </ion-item-option>
             <ion-item-option (click)="deleteOrder(order)" color="danger">
-              <ion-icon name="trash" slot="icon-only"></ion-icon>
+              <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>

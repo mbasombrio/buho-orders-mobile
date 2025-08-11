@@ -12,10 +12,14 @@ import {
   archiveOutline,
   bookmark,
   bookmarkOutline,
+  business,
   businessOutline,
+  car,
   cartOutline,
   chevronForward,
   chevronForwardOutline,
+  create,
+  createOutline,
   heart,
   heartOutline,
   lockClosedOutline,
@@ -33,6 +37,7 @@ import {
   receiptOutline,
   settings,
   settingsOutline,
+  storefront,
   trash,
   trashOutline,
   warning,
@@ -58,7 +63,10 @@ addIcons({
   'warning-outline': warningOutline,
   'bookmark': bookmark,
   'bookmark-outline': bookmarkOutline,
+  'business': business,
   'business-outline': businessOutline,
+  'car': car,
+  'storefront': storefront,
   'person': person,
   'person-outline': personOutline,
   'people': people,
@@ -76,7 +84,10 @@ addIcons({
   'add': add,
   'add-outline': addOutline,
   'chevron-forward': chevronForward,
-  'chevron-forward-outline': chevronForwardOutline
+  'chevron-forward-outline': chevronForwardOutline,
+  'create': create,
+  'create-outline': createOutline
+
 });
 
 bootstrapApplication(AppComponent, {
