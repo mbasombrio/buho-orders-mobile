@@ -20,7 +20,7 @@
       <ion-searchbar placeholder="Buscar pedidos..." debounce="300">
       </ion-searchbar>
 
-      <ion-segment value="todos">
+      <ion-segment value="pendiente" scrollable="true">
         <ion-segment-button value="todos">
           <ion-label>Todos</ion-label>
         </ion-segment-button>
@@ -28,7 +28,10 @@
           <ion-label>Pendientes</ion-label>
         </ion-segment-button>
         <ion-segment-button value="completado">
-          <ion-label>Completados</ion-label>
+          <ion-label>Facturados</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="completado">
+          <ion-label>Cancelados</ion-label>
         </ion-segment-button>
       </ion-segment>
     </ion-card-content>
@@ -57,14 +60,8 @@
         @for (order of orders; track order.id) {
         <ion-item-sliding>
           <ion-item button (click)="viewOrderDetails(order)">
-            <ion-avatar slot="start">
-              <div class="order-avatar">
-                <ion-icon name="receipt"></ion-icon>
-              </div>
-            </ion-avatar>
-
             <ion-label>
-              <h2>Pedido #{{ order.id }}</h2>
+              <h2>#{{ order.id }}</h2>
               <h3>{{ order.customer }}</h3>
               <p>{{ order.date }} • {{ order.items }} artículos</p>
             </ion-label>
@@ -94,7 +91,7 @@
 
   <!-- Floating Action Button -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addNewOrder()">
+    <ion-fab-button (click)="addNewOrder()" color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

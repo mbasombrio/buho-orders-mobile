@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 import { provideIonicAngular } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  add,
+  addOutline,
   apps,
   appsOutline,
   archive,
@@ -58,7 +60,9 @@ addIcons({
   'settings-outline': settingsOutline,
   'apps': apps,
   'apps-outline': appsOutline,
-  'cart-outline': cartOutline
+  'cart-outline': cartOutline,
+  'add': add,
+  'add-outline': addOutline
 });
 
 bootstrapApplication(AppComponent, {
